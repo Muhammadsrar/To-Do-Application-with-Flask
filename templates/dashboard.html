@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- ✅ TOP NAVIGATION BAR -->
+    <nav class="navbar">
+        <a href="/tasks/all" class="button button-primary">All Tasks</a>
+        <a href="/tasks/filter?category=Personal" class="button button-primary">Personal Tasks</a>
+        <a href="/tasks/filter?category=Office" class="button button-primary">Office Tasks</a>
+    </nav>
+
+    <!-- ✅ MAIN CONTENT -->
+    <div class="center-container" style="max-width: 700px; margin: 50px auto;">
+        
+        <h1>Welcome, {{ username }}!</h1>
+        <p>This is your dashboard. You can manage your tasks here.</p>
+
+        <!-- ✅ TASK CREATION FORM -->
+        <h2>Create New Task</h2>
+        <form action="/tasks/create" method="post" class="task-form">
+            <label for="title">Title:</label>
+            <input type="text" name="title" required>
+
+            <label for="description">Description:</label>
+            <input type="text" name="description" required>
+
+            <label for="deadline">Deadline:</label>
+            <input type="date" name="deadline" required>
+
+            <label for="category">Category:</label>
+            <select name="category" required>
+                <option value="Personal">Personal</option>
+                <option value="Office">Office</option>
+            </select>
+
+            <button type="submit" class="button button-primary">Create Task</button>
+        </form>
+
+        <!-- ✅ TASK TABLE (AGAR SHOW KARNA HO TO YAH PE RAKHO) -->
+        {% if tasks %}
+        <h2 style="margin-top: 50px;">Your Tasks</h2>
+        <table class="task-table">
+            <tr>
+                <th>Task ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Deadline</th>
+                <th>Actions</th>
+            </tr>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.title }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.category }}</td>
+                <td>{{ task.deadline.strftime('%Y-%m-%d') }}</td>
+                <td>
+                    <a href="/tasks/update_form/{{ task.id }}" class="button button-small">Update</a>
+                    <form action="/tasks/delete/{{ task.id }}" method="post" style="display:inline;">
+                        <button type="submit" class="button button-danger button-small">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+
+    <!-- ✅ LOGOUT BUTTON AT BOTTOM -->
+    <div style="display: flex; justify-content: center; margin: 50px 0;">
+        <a href="/auth/logout" class="button button-danger">Logout</a>
+    </div>
+
+</body>
+</html>

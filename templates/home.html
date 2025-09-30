@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask To-Do App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="center-container" style="max-width: 450px;">
+        <!-- App Header -->
+        <h1 style="font-size: 2.2rem; color: #1976d2; margin-bottom: 24px;">Flask To-Do Application</h1>
+        <p style="margin-bottom: 24px; color: #555; font-size: 1.1rem;">
+            Manage your tasks efficiently and stay organized.
+        </p>
+
+        <!-- Buttons -->
+        <div class="links" style="flex-direction: column; gap: 15px;">
+            <a href="{{ url_for('auth.register_page') }}" class="button button-primary">Register</a>
+            <a href="{{ url_for('auth.login_page') }}" class="button button-success">Login</a>
+        </div>
+    </div>
+</body>
+</html>

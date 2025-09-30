@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Created</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="center-container" style="text-align: center; margin-top: 100px;">
+        <h2>Task created successfully!</h2>
+        <p><strong>Task ID:</strong> {{ task_id }}</p>
+        <p><strong>Category:</strong> {{ category }}</p>
+       <div style="margin-top: 20px; display: flex; justify-content: center; gap: 15px;">
+          <a href="/tasks/all" class="button button-primary">View All Tasks</a>
+          <a href="/tasks/dashboard" class="button button-success">Go to Dashboard</a>
+
+       </div>
+
+    </div>
+</body>
+</html>
